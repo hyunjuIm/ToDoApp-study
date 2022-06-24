@@ -6,6 +6,7 @@ import com.hyunju.todoapp.di.appTestModule
 import com.hyunju.todoapp.livedata.LiveDataTestObserver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
@@ -21,10 +22,10 @@ import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
 @ExperimentalCoroutinesApi
-internal class ViewModelTest : KoinTest {
+internal abstract class ViewModelTest : KoinTest {
 
     @get:Rule
-    val mokitoRule: MockitoRule = MockitoJUnit.rule()
+    val mockitoRule: MockitoRule = MockitoJUnit.rule()
 
     @Mock
     private lateinit var context: Application
@@ -43,7 +44,7 @@ internal class ViewModelTest : KoinTest {
     @After
     fun tearDown() {
         stopKoin()
-        Dispatchers.resetMain() // MainDispatcher를 초기화 해주어야 메모리 누수가 발생하지 않는다.
+        Dispatchers.resetMain() // MainDispatcher를 초기화 해주어야 메모리 누수가 발생하지 않음
     }
 
     protected fun <T> LiveData<T>.test(): LiveDataTestObserver<T> {
@@ -51,4 +52,5 @@ internal class ViewModelTest : KoinTest {
         observeForever(testObserver)
         return testObserver
     }
+
 }
