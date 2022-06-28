@@ -19,4 +19,8 @@ class DefaultToDoRepository:ToDoRepository {
     override suspend fun getTodoItem(itemId: Long): ToDoEntity? {
         TODO("Not yet implemented")
     }
+
+    override suspend fun deleteAll() {
+        TODO("Not yet implemented")
+    }
 }

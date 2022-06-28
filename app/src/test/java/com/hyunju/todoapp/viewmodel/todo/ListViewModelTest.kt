@@ -5,6 +5,7 @@ import com.hyunju.todoapp.data.Entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.GetToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.InsertToDoListUseCase
 import com.hyunju.todoapp.presentation.list.ListViewModel
+import com.hyunju.todoapp.presentation.list.ToDoListState
 import com.hyunju.todoapp.viewmodel.ViewModelTest
 import kotlinx.coroutines.*
 import kotlinx.coroutines.test.runBlockingTest
@@ -47,7 +48,13 @@ internal class ListViewModelTest : ViewModelTest() {
     fun `test viewModel fetch`(): Unit = runBlockingTest {
         val testObservable = viewModel.toDoListLiveData.test()
         viewModel.fetchData()
-        testObservable.assertValueSequence(listOf(mockList))
+        testObservable.assertValueSequence(
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(mockList),
+            )
+        )
     }
 
     @Test
@@ -60,5 +67,18 @@ internal class ListViewModelTest : ViewModelTest() {
         )
         viewModel.updateEntity(todo)
         assert(getToDoItemUseCase(todo.id)?.hasCompleted ?: false == todo.hasCompleted)
+    }
+
+    @Test
+    fun `test Item Delete All`(): Unit = runBlockingTest {
+        val testObservable = viewModel.toDoListLiveData.test()
+        viewModel.deleteAll()
+        testObservable.assertValueSequence(
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(listOf()),
+            )
+        )
     }
 }
