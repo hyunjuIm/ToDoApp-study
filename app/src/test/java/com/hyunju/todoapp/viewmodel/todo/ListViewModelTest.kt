@@ -2,6 +2,7 @@ package com.hyunju.todoapp.viewmodel.todo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.domain.todo.GetToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.InsertToDoListUseCase
 import com.hyunju.todoapp.presentation.list.ListViewModel
 import com.hyunju.todoapp.viewmodel.ViewModelTest
@@ -12,7 +13,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.koin.test.inject
 
-@ObsoleteCoroutinesApi
 @ExperimentalCoroutinesApi
 internal class ListViewModelTest : ViewModelTest() {
 
@@ -23,6 +23,7 @@ internal class ListViewModelTest : ViewModelTest() {
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     private val insertToDoListUseCase: InsertToDoListUseCase by inject()
+    private val getToDoItemUseCase: GetToDoItemUseCase by inject()
 
     private val mockList = (0 until 10).map {
         ToDoEntity(
@@ -49,4 +50,15 @@ internal class ListViewModelTest : ViewModelTest() {
         testObservable.assertValueSequence(listOf(mockList))
     }
 
+    @Test
+    fun `test Item Update`(): Unit = runBlockingTest {
+        val todo = ToDoEntity(
+            id = 1,
+            title = "title 1",
+            description = "description 1",
+            hasCompleted = true
+        )
+        viewModel.updateEntity(todo)
+        assert(getToDoItemUseCase(todo.id)?.hasCompleted ?: false == todo.hasCompleted)
+    }
 }
