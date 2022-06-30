@@ -3,8 +3,10 @@ package com.hyunju.todoapp.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.hyunju.todoapp.data.Entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.DeleteToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.GetToDoItemUseCase
+import com.hyunju.todoapp.domain.todo.InsertToItemDoUseCase
 import com.hyunju.todoapp.domain.todo.UpdateToDoUseCase
 import com.hyunju.todoapp.presentation.BaseViewModel
 import com.hyunju.todoapp.presentation.list.ToDoListState
@@ -17,7 +19,8 @@ internal class DetailViewModel(
     var id: Long = -1,
     private val getToDoItemUseCase: GetToDoItemUseCase,
     private val deleteToDoItemUseCase: DeleteToDoItemUseCase,
-    private val updateToDoUseCase: UpdateToDoUseCase
+    private val updateToDoUseCase: UpdateToDoUseCase,
+    private val insertToItemDoUseCase: InsertToItemDoUseCase
 ) : BaseViewModel() {
 
     private var _toDoDetailLiveData =
@@ -27,10 +30,9 @@ internal class DetailViewModel(
     override fun fetchData(): Job = viewModelScope.launch {
         when (detailMode) {
             DetailMode.WRITE -> {
-
+                _toDoDetailLiveData.postValue(ToDoDetailState.Write)
             }
             DetailMode.DETAIL -> {
-                _toDoDetailLiveData.postValue(ToDoDetailState.Loading)
                 try {
                     getToDoItemUseCase(id)?.let {
                         _toDoDetailLiveData.postValue(ToDoDetailState.Success(it))
@@ -64,7 +66,18 @@ internal class DetailViewModel(
         _toDoDetailLiveData.postValue(ToDoDetailState.Loading)
         when (detailMode) {
             DetailMode.WRITE -> {
-
+                try {
+                    val toDoEntity = ToDoEntity(
+                        title = title,
+                        description = description
+                    )
+                    id = insertToItemDoUseCase(toDoEntity)
+                    _toDoDetailLiveData.postValue(ToDoDetailState.Success(toDoEntity))
+                    detailMode = DetailMode.DETAIL
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    _toDoDetailLiveData.postValue(ToDoDetailState.Error)
+                }
             }
             DetailMode.DETAIL -> {
                 try {
