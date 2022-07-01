@@ -3,13 +3,12 @@ package com.hyunju.todoapp.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.DeleteToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.GetToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.InsertToItemDoUseCase
 import com.hyunju.todoapp.domain.todo.UpdateToDoUseCase
 import com.hyunju.todoapp.presentation.BaseViewModel
-import com.hyunju.todoapp.presentation.list.ToDoListState
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.lang.Exception

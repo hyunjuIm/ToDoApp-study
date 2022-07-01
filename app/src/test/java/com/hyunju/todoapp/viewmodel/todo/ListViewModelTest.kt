@@ -1,7 +1,7 @@
 package com.hyunju.todoapp.viewmodel.todo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.GetToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.InsertToDoListUseCase
 import com.hyunju.todoapp.presentation.list.ListViewModel

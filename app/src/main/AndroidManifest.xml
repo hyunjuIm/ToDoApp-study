@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.list.ListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,7 +1,7 @@
 package com.hyunju.todoapp.viewmodel.todo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.InsertToItemDoUseCase
 import com.hyunju.todoapp.presentation.detail.DetailMode
 import com.hyunju.todoapp.presentation.detail.DetailViewModel
@@ -16,7 +16,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.koin.core.parameter.parametersOf
 import org.koin.test.inject
-import java.lang.Exception
 
 @ExperimentalCoroutinesApi
 internal class DetailViewModelTest : ViewModelTest() {

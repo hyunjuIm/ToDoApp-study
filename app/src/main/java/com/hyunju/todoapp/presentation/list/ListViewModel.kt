@@ -2,9 +2,8 @@ package com.hyunju.todoapp.presentation.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.DeleteAllToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.GetToDoListUseCase
 import com.hyunju.todoapp.domain.todo.UpdateToDoUseCase

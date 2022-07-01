@@ -1,6 +1,6 @@
 package com.hyunju.todoapp.presentation.list
 
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 
 sealed class ToDoListState {
 

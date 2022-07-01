@@ -1,6 +1,6 @@
 package com.hyunju.todoapp.data.repository
 
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 
 interface ToDoRepository {
 

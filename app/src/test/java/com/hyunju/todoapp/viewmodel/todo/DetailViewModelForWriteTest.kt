@@ -1,7 +1,7 @@
 package com.hyunju.todoapp.viewmodel.todo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.hyunju.todoapp.data.Entity.ToDoEntity
+import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.presentation.detail.DetailMode
 import com.hyunju.todoapp.presentation.detail.DetailViewModel
 import com.hyunju.todoapp.presentation.detail.ToDoDetailState
@@ -9,7 +9,6 @@ import com.hyunju.todoapp.presentation.list.ListViewModel
 import com.hyunju.todoapp.presentation.list.ToDoListState
 import com.hyunju.todoapp.viewmodel.ViewModelTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
