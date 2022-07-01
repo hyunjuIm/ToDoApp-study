@@ -66,7 +66,7 @@ internal class ListViewModelTest : ViewModelTest() {
             hasCompleted = true
         )
         viewModel.updateEntity(todo)
-        assert(getToDoItemUseCase(todo.id)?.hasCompleted ?: false == todo.hasCompleted)
+        assert((getToDoItemUseCase(todo.id)?.hasCompleted ?: false) == todo.hasCompleted)
     }
 
     @Test
