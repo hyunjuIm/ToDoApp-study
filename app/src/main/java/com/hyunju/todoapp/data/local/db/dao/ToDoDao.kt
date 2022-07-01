@@ -25,6 +25,6 @@ interface ToDoDao {
     suspend fun deleteAll()
 
     @Update
-    suspend fun update(toDoEntity: ToDoEntity): Int
+    suspend fun update(toDoEntity: ToDoEntity)
 
 }

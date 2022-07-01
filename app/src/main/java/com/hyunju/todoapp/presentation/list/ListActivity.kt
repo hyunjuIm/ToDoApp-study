@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hyunju.todoapp.R
 import com.hyunju.todoapp.databinding.ActivityListBinding
 import com.hyunju.todoapp.presentation.BaseActivity
+import com.hyunju.todoapp.presentation.detail.DetailActivity
 import com.hyunju.todoapp.presentation.detail.DetailMode
 import com.hyunju.todoapp.presentation.list.view.ToDoAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -46,10 +47,10 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
         }
 
         addToDoButton.setOnClickListener {
-//            startActivityForResult(
-//                DetailActivity.getIntent(this@ListActivity, DetailMode.WRITE),
-//                DetailActivity.FETCH_REQUEST_CODE
-//            )
+            startActivityForResult(
+                DetailActivity.getIntent(this@ListActivity, DetailMode.WRITE),
+                DetailActivity.FETCH_REQUEST_CODE
+            )
         }
     }
 
@@ -90,10 +91,10 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
             adapter.setToDoList(
                 state.toDoList,
                 toDoItemClickListener = {
-//                    startActivityForResult(
-//                        DetailActivity.getIntent(this@ListActivity, it.id, DetailMode.DETAIL),
-//                        DetailActivity.FETCH_REQUEST_CODE
-//                    )
+                    startActivityForResult(
+                        DetailActivity.getIntent(this@ListActivity, it.id, DetailMode.DETAIL),
+                        DetailActivity.FETCH_REQUEST_CODE
+                    )
                 }, toDoCheckListener = {
                     viewModel.updateEntity(it)
                 }
@@ -105,13 +106,13 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
         Toast.makeText(this, "에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if (requestCode == DetailActivity.FETCH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-//            viewModel.fetchData()
-//        }
-//    }
-//
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == DetailActivity.FETCH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            viewModel.fetchData()
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_delete_all -> {

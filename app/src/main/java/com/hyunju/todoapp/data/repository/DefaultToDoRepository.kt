@@ -26,7 +26,7 @@ class DefaultToDoRepository(
         toDoDao.insert(toDoList)
     }
 
-    override suspend fun updateToDoItem(toDoItem: ToDoEntity): Int = withContext(ioDispatcher) {
+    override suspend fun updateToDoItem(toDoItem: ToDoEntity) = withContext(ioDispatcher) {
         toDoDao.update(toDoItem)
     }
 

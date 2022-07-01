@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ToDoApp">
         <activity
+            android:name=".presentation.detail.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.BaseActivity"
             android:exported="false" />
         <activity
