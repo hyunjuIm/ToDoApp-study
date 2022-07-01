@@ -37,7 +37,8 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
     }
 
     private fun initViews(binding: ActivityListBinding) = with(binding) {
-        recyclerView.layoutManager = LinearLayoutManager(this@ListActivity, LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(this@ListActivity, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = adapter
 
         refreshLayout.setOnRefreshListener {
@@ -104,27 +105,27 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
         Toast.makeText(this, "에러가 발생했습니다.", Toast.LENGTH_SHORT).show()
     }
 
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //        if (requestCode == DetailActivity.FETCH_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
 //            viewModel.fetchData()
 //        }
 //    }
 //
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when (item.itemId) {
-//            R.id.action_delete_all -> {
-//                viewModel.deleteAll()
-//                true
-//            }
-//            else -> {
-//                super.onOptionsItemSelected(item)
-//            }
-//        }
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.list_menu, menu)
-//        return true
-//    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_delete_all -> {
+                viewModel.deleteAll()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.list_menu, menu)
+        return true
+    }
 }

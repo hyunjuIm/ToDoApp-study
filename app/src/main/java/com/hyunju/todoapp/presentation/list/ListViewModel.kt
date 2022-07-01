@@ -6,10 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.hyunju.todoapp.data.entity.ToDoEntity
 import com.hyunju.todoapp.domain.todo.DeleteAllToDoItemUseCase
 import com.hyunju.todoapp.domain.todo.GetToDoListUseCase
+import com.hyunju.todoapp.domain.todo.InsertToDoListUseCase
 import com.hyunju.todoapp.domain.todo.UpdateToDoUseCase
 import com.hyunju.todoapp.presentation.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.inject
 
 internal class ListViewModel(
     private val getToDoListUseCase: GetToDoListUseCase,
